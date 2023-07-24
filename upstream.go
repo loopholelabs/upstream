@@ -21,12 +21,14 @@ import (
 )
 
 var (
+	ErrDisabled   = errors.New("upstream is disabled")
 	ErrMissingSNI = errors.New("missing SNI")
 	ErrUnknownSNI = errors.New("unknown SNI")
 )
 
 type Options struct {
 	LogName       string
+	Disabled      bool
 	ListenAddress string
 }
 
@@ -58,8 +60,12 @@ type Upstream struct {
 	wg     sync.WaitGroup
 }
 
-func New(options *Options, storage Storage, logger *zerolog.Logger) *Upstream {
+func New(options *Options, storage Storage, logger *zerolog.Logger) (*Upstream, error) {
 	l := logger.With().Str(options.LogName, "UPSTREAM").Logger()
+	if options.Disabled {
+		l.Warn().Msg("disabled")
+		return nil, ErrDisabled
+	}
 	return &Upstream{
 		logger:           &l,
 		options:          options,
@@ -67,7 +73,7 @@ func New(options *Options, storage Storage, logger *zerolog.Logger) *Upstream {
 		certificates:     make(map[string]*tls.Config),
 		rootCertificates: make(map[string]*tls.Config),
 		routes:           make(map[string]*Route),
-	}
+	}, nil
 }
 
 func (p *Upstream) Start() error {

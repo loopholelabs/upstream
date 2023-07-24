@@ -27,23 +27,33 @@ var (
 	ErrListenAddressRequired = errors.New("listen address is required")
 )
 
+const (
+	DefaultDisabled = false
+)
+
 type Config struct {
+	Disabled      bool   `yaml:"disabled"`
 	ListenAddress string `yaml:"listen_address"`
 }
 
 func New() *Config {
-	return &Config{}
+	return &Config{
+		Disabled: DefaultDisabled,
+	}
 }
 
 func (c *Config) Validate() error {
-	if c.ListenAddress == "" {
-		return ErrListenAddressRequired
+	if !c.Disabled {
+		if c.ListenAddress == "" {
+			return ErrListenAddressRequired
+		}
 	}
 
 	return nil
 }
 
 func (c *Config) RootPersistentFlags(flags *pflag.FlagSet) {
+	flags.BoolVar(&c.Disabled, "upstream-disabled", false, "Disable the upstream service")
 	flags.StringVar(&c.ListenAddress, "upstream-listen-address", "", "The listen address for the upstream service")
 }
 
