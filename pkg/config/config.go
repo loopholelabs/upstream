@@ -32,8 +32,8 @@ const (
 )
 
 type Config struct {
-	Disabled      bool   `yaml:"disabled"`
-	ListenAddress string `yaml:"listen_address"`
+	Disabled      bool   `mapstructure:"disabled"`
+	ListenAddress string `mapstructure:"listen_address"`
 }
 
 func New() *Config {
