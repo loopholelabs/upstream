@@ -9,7 +9,7 @@ A simple upstream proxy designed for use within Loophole Labs projects
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/loopholelabs/upstream][gitrepo]. For more contribution information check out [the contribution guide](https://github.com/loopholelabs/upstrea/blob/master/CONTRIBUTING.md).
+Bug reports and pull requests are welcome on GitHub at [https://github.com/loopholelabs/upstream][gitrepo]. For more contribution information check out [the contribution guide](https://github.com/loopholelabs/upstream/blob/master/CONTRIBUTING.md).
 
 ## License
 
