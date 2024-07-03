@@ -6,7 +6,7 @@ require (
 	github.com/gobwas/pool v0.2.1
 	github.com/quic-go/quic-go v0.37.0
 	github.com/rs/zerolog v1.29.1
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.4
 	github.com/valyala/fasthttp v1.55.0
